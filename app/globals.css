@@ -26,3 +26,9 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer base {
+  h1 {
+    @apply font-extrabold text-2xl mb-3;
+  }
+}
