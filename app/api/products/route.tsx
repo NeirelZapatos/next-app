@@ -10,22 +10,48 @@ import Product from '@/app/models/Product';
 //     ]);
 // }
 
-export default async function GET(){
+export async function GET(request: NextRequest){
     await dbConnect();
 
     try {
         const products = await Product.find({});
         return NextResponse.json(products);
-    } catch (err: any) {
-        return NextResponse.json({ error: err.message })
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            return NextResponse.json({ error: err.message }, { status: 500 })
+        }
+
+        return NextResponse.json({ error: 'An Unkown error occurred' }, { status: 500 })
     }
 }
 
 export async function POST(request: NextRequest) {
-    const body = await request.json();
-    const validation = schema.safeParse(body);
-    if (!validation.success) {
-        return NextResponse.json(validation.error.errors, { status: 400 })
+    await dbConnect();
+
+    try {
+        const body = await request.json();
+        const validation = schema.safeParse(body);
+
+        if (!validation.success) {
+            return NextResponse.json(validation.error.errors, { status: 400 })
+        }
+
+        const checkProduct = await Product.findOne({ name: body.name });
+
+        if (checkProduct) {
+            return NextResponse.json({ error: 'Prodcut already exits' }, { status: 409 })
+        }
+
+        const newProduct = new Product(body);
+        await newProduct.save();
+
+        return NextResponse.json(newProduct, { status: 201 });
+
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            return NextResponse.json({ error: err.message }, { status: 500 })
+        }
+
+        return NextResponse.json({ error: 'An Unkown error occurred' }, { status: 500 })
     }
-    return NextResponse.json({ id: 10, name: body.name, price: body.price }, { status: 201 });
 }

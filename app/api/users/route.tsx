@@ -6,7 +6,7 @@ export function GET(request: NextRequest) {
         { id: 1, name: 'Neirel' },
         { id: 2, name: 'Priya' }
     ]);
-}
+};
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
@@ -15,4 +15,4 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(validation.error.errors, { status: 400 })
     }
     return NextResponse.json({ id: 1, name: body.name }, { status: 201 });
-}
+};
