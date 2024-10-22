@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 const schema = z.object({
-    name: z.string().min(3),
-    // email: z.string().email(),
-    // age: z.number()
+    username: z.string().min(3),
+    age: z.number().max(100).optional(),
+    email: z.string().email(),
 });
 
 export default schema;

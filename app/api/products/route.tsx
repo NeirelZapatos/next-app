@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
         const checkProduct = await Product.findOne({ name: body.name });
 
         if (checkProduct) {
-            return NextResponse.json({ error: 'Prodcut already exits' }, { status: 409 })
+            return NextResponse.json({ error: 'Product already exits' }, { status: 409 })
         }
 
         const newProduct = new Product(body);
