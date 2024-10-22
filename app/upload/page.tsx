@@ -1,22 +1,34 @@
 'use client';
-import React from 'react'
-import { CldUploadWidget } from 'next-cloudinary';
-import { useState } from 
+import React, { useState } from 'react'
+import { CldUploadWidget, CldImage } from 'next-cloudinary';
+
+interface CloudinaryResult {
+    public_id: string;
+}
 
 const UploadPage = () => {
     const [publicId, setPublicId] = useState('');
+
     return (
-        <CldUploadWidget
-            uploadPreset='testing'
-            onSuccess={(result, widget) => {
-                console.log(result);
-            }}>
-            {({ open }) =>
-                <button
-                    className='btn btn-primary'
-                    onClick={() => open()}>Upload
-                </button>}
-        </CldUploadWidget>
+        <>
+            {publicId && <CldImage src={publicId} width={270} height={180} alt="An image"/>}
+            <CldUploadWidget
+                uploadPreset='testing'
+                options={{
+                    sources: ['local', 'url', 'google_drive']
+                }}
+                onSuccess={(result, widget) => {
+                    if (result.event !== 'success') return;
+                    const info = result.info as CloudinaryResult
+                    setPublicId(info.public_id);
+                }}>
+                {({ open }) =>
+                    <button
+                        className='btn btn-primary'
+                        onClick={() => open()}>Upload
+                    </button>}
+            </CldUploadWidget>
+        </>
     )
 }
 
