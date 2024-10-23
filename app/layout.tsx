@@ -37,7 +37,7 @@ export default function RootLayout({
             {children}
             {/* </Suspense> */}
           </main>
-          </AuthProvider>
+        </AuthProvider>
       </body>
     </html>
   );

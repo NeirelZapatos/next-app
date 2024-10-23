@@ -20,7 +20,7 @@ const config: Config = {
   ],
   daisyui: {
     base: false, // applies background color and foreground color for root element by default
-    themes: ["light", "winter", "dark"],
+    themes: ["autumn"]
   },
 };
 export default config;
