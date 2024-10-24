@@ -9,7 +9,6 @@ export interface IUser extends Document {
 const userSchema: Schema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
     },
     age: {
         type: Number,
@@ -17,6 +16,9 @@ const userSchema: Schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+    },
+    hashedPassword: {
+        type: String,
     }
 });
 

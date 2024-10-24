@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "./NavBar"
+import { SessionProvider } from 'next-auth/react';
+import AuthProvider from "./api/auth/Provider";
 // import { Suspense } from 'react';
 
 const geistSans = localFont({
@@ -28,12 +30,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NavBar />
-        <main className="p-5">
-          {/* <Suspense fallback={<p>Loading...</p>}> */}
+        <AuthProvider>
+          <NavBar />
+          <main className="p-5">
+            {/* <Suspense fallback={<p>Loading...</p>}> */}
             {children}
-          {/* </Suspense> */}
-        </main> 
+            {/* </Suspense> */}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );
