@@ -1,7 +1,6 @@
 'use client';
-import React from 'react'
+import React, { useState } from 'react'
 import { CldUploadWidget } from 'next-cloudinary';
-import { useState } from 
 
 const UploadPage = () => {
     const [publicId, setPublicId] = useState('');
