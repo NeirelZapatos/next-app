@@ -15,7 +15,7 @@ const UsersPage = async ({  searchParams: { sortOrder } }: Props) => {
         <UserTable sortOrder={sortOrder} />
       </Suspense>
     </>
-  )
+  );
 }
 
 export default UsersPage
