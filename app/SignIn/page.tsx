@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 import { FormEvent, useState } from 'react';
 
@@ -21,7 +22,7 @@ export default function SignInPage() {
             setError(result.error); // display error if authentication fails
         } else {
             // Redirect or handle success
-            window.location.href = '/dashboard';
+            window.location.href = '/';
         }
     };
 
