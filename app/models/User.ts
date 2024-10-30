@@ -19,6 +19,7 @@ const userSchema: Schema = new mongoose.Schema({
     },
     hashedPassword: {
         type: String,
+        required: true
     }
 });
 

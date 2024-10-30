@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { CldUploadWidget, CldImage } from 'next-cloudinary';
 
+
 interface CloudinaryResult {
     public_id: string;
 }
@@ -21,6 +22,7 @@ const UploadPage = () => {
                     if (result.event !== 'success') return;
                     const info = result.info as CloudinaryResult
                     setPublicId(info.public_id);
+                    // setPublicId("sihdnptreuzhmbgfq4ri");
                 }}>
                 {({ open }) =>
                     <button
