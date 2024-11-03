@@ -1,11 +1,13 @@
+import { Metadata } from "next";
+
 export default async function Page({ params }: { params: { id: number } }) {
-    const fetchProducts = async () => {
+    const fetchProduct = async () => {
         const res = await fetch(`http://localhost:3000/api/products/${params.id}`);
         const product = await res.json();
         return product;
     }
 
-    const product = await fetchProducts();
+    const product = await fetchProduct();
 
     return (
         <div>
@@ -17,4 +19,27 @@ export default async function Page({ params }: { params: { id: number } }) {
             </div>
         </div>
     );
+}
+
+export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata> {
+    const fetchProduct = async () => {
+        const res = await fetch(`http://localhost:3000/api/products/${params.id}`);
+        const product = await res.json();
+        return product;
+    }
+
+    const product = await fetchProduct();
+
+    if(product.description) {
+        return {
+            title: product.name,
+            description: product.description
+        }
+    } else {
+        return {
+            title: product.name
+        }
+    }
+
+    
 }

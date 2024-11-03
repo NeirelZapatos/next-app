@@ -1,8 +1,21 @@
-// import Image from "next/image";
+'use client'
+
+import onePiece from "@/public/images/one piece.jpg"
+import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "./components/ProductCard/ProductCard";
 import { getServerSession } from 'next-auth'
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+
+const HeavyComponent = dynamic(() => import('./components/HeavyComponent'),
+  { 
+    // ssr: false,
+    loading: () => <p>Loading...</p>
+  }
+);
 
 // const Header = () => (
 //   <div className="navbar bg-base-100" data-theme="light">
@@ -59,15 +72,41 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 //   </div>  
 // )
 
-export default async function Home() {
-  const session = await getServerSession(authOptions)
+export default function Home() {
+  const [isVisible, setVisible] = useState(false);
+  // const session = await getServerSession(authOptions)
 
   return (
-    <main>
+    <main className="relative h-screen">
       {/* <Header /> */}
-      <h1>Hello { session && <span>{ session.user!.name }</span>}</h1>
+      {/* <h1 className="font-poppins">Hello { session && <span>{ session.user!.name }</span>}</h1> */}
       <Link href="/users">Users</Link>
       <ProductCard />
+      <Image src={onePiece} alt="One Piece"/>
+      <Image src="https://bit.ly/react-cover" alt="React Cover" height={300} width={170} />
+      <button onClick={(async () => {
+        const _ = (await import('lodash')).default;
+        const users = [
+          { name: 'c'},
+          { name: 'b'},
+          { name: 'a'}
+        ];
+
+        const sorted = _.orderBy(users, ['name']);
+        console.log(sorted);
+      })}>Sort</button>
+
+      <button onClick={() => setVisible(true)}>Show</button>
+      { isVisible && <HeavyComponent />}
+      {/* <Image src="https://bit.ly/react-cover" alt="React Cover" fill style={{ objectFit: 'cover' }}/>
+      <Image src="https://bit.ly/react-cover" alt="React Cover" fill style={{ objectFit: 'contain' }}/>
+      <Image src="https://bit.ly/react-cover" alt="React Cover" fill className="object-cover" sizes="100vw"/>
+      <Image src="https://bit.ly/react-cover" alt="React Cover" fill className="object-cover" sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33 vw" quality={100} priority /> */}
     </main>
   );
 }
+
+// used to override the metadata for the website
+// export const metadata: Metadata = {
+//   title: '...'
+// }
