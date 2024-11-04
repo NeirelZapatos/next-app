@@ -3,7 +3,7 @@ import schema from './schema';
 import dbConnect from "@/app/lib/dbConnect";
 import User from "@/app/models/User";
 
-export async function GET(request: NextRequest){
+export async function GET(){
     await dbConnect();
 
     try {

@@ -10,7 +10,7 @@ import Product from '@/app/models/Product';
 //     ]);
 // }
 
-export async function GET(request: NextRequest){
+export async function GET(){
     await dbConnect();
 
     try {

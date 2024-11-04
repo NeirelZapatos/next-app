@@ -3,9 +3,9 @@ import schema from "../schema";
 import User from "@/app/models/User";
 import dbConnect from "@/app/lib/dbConnect";
 
-interface Props {
-    params: { id: number }
-}
+// interface Props {
+//     params: { id: number }
+// }
 
 export async function PUT(request: NextRequest, { params }: { params: { id: number } }) {
     await dbConnect();

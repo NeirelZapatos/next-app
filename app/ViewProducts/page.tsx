@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-
+import { IProduct } from "../models/Product";
 export default async function Page() {
-    const fetchProducts = async () => {
+    const fetchProducts = async (): Promise<IProduct[]> => {
         const res = await fetch('http://localhost:3000/api/products');
         const products = await res.json();
         return products;
@@ -21,7 +20,7 @@ export default async function Page() {
     return (
         <div>
             <h1>Products</h1>
-            {products.map((product: any) => (
+            {products.map((product: IProduct) => (
                 <div key={product._id}>
                     <h2>{product.name}</h2>
                     <p>{product.description}</p>

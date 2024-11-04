@@ -18,7 +18,7 @@ const UploadPage = () => {
                 options={{
                     sources: ['local', 'url', 'google_drive']
                 }}
-                onSuccess={(result, widget) => {
+                onSuccess={(result) => {
                     if (result.event !== 'success') return;
                     const info = result.info as CloudinaryResult
                     setPublicId(info.public_id);

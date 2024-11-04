@@ -4,9 +4,9 @@ import onePiece from "@/public/images/one piece.jpg"
 import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "./components/ProductCard/ProductCard";
-import { getServerSession } from 'next-auth'
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import { Metadata } from "next";
+// import { getServerSession } from 'next-auth'
+// import { authOptions } from "./api/auth/authOptions";
+// import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
