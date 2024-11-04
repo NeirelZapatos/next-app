@@ -7,7 +7,7 @@ import dbConnect from "@/app/lib/dbConnect";
 //     params: { id: number }
 // }
 
-export async function PUT(request: NextRequest, { params }: { params: { id: number } }) {
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
     await dbConnect();
 
     try {
@@ -41,7 +41,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: numb
     }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: number } }) {
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
     await dbConnect();
 
     try {
@@ -64,7 +64,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: n
     }
 }
 
-export async function GET(request: NextRequest, { params }: { params: { id: number } }) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
     await dbConnect();
 
     try {

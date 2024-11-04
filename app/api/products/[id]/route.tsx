@@ -4,7 +4,7 @@ import Product from '@/app/models/Product';
 import dbConnect from '@/app/lib/dbConnect';
 
 
-export async function PUT(request: NextRequest, { params }: { params: { id: number } }) {
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
     await dbConnect();
 
     try {
@@ -38,7 +38,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: numb
     }
 }
 
-export async function DELETE({ params }: { params: { id: number } }) {
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
     await dbConnect();
 
     try {
@@ -61,7 +61,7 @@ export async function DELETE({ params }: { params: { id: number } }) {
     }
 }
 
-export async function GET({ params }: { params: { id: number } }) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
     await dbConnect();
 
     try {
